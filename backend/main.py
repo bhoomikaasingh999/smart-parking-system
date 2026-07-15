@@ -55,7 +55,7 @@ def calculate_live_price(slot_id: str, occupancy_pct: float) -> float:
     is_ev = slot_num % 5 == 0
     return round(dynamic_normal_price * 1.3, 2) if is_ev else dynamic_normal_price
 
-# -----------------------------
+
 
 @app.post("/api/auth/signup")
 async def signup(user: DynamicUserCreate):
