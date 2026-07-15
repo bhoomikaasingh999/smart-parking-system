@@ -1,8 +1,11 @@
 import asyncio
 from motor.motor_asyncio import AsyncIOMotorClient
+import os
+from dotenv import load_dotenv
 
-MONGO_DETAILS = "mongodb+srv://bhoomikasingh4926_db_user:Bhoomika$&!!444@mycluster.kiizfjr.mongodb.net/?appName=mycluster"
-client = AsyncIOMotorClient(MONGO_DETAILS)
+load_dotenv()
+mongo_details = os.getenv("MONGO_DETAILS")
+client = AsyncIOMotorClient(mongo_details)
 database = client.smart_parking
 slot_collection = database.get_collection("slots")
 
