@@ -5,15 +5,13 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str
 
-# 🔐 ROLE UPGRADE: Login response token payload metadata
 class Token(BaseModel):
     access_token: str
     token_type: str
-    role: str       # "user" ya "admin"
+    role: str      
     email: EmailStr
     username: str
 
-# Ek single parking slot ka data kaisa dikhega
 class ParkingSlotResponse(BaseModel):
     slot_id: str
     is_occupied: bool
