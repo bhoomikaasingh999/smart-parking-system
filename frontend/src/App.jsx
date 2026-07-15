@@ -4,7 +4,7 @@ import Dashboard from './components/Dashboard'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [role, setRole] = useState('user') // 🔐 Track role centrally inside top-level state
+  const [role, setRole] = useState('user') 
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -16,14 +16,14 @@ function App() {
   }, [])
 
   const handleLoginSuccess = () => {
-    // Sync state cleanly with recent localstorage updates post-login
+    
     const savedRole = localStorage.getItem('role') || 'user'
     setRole(savedRole)
     setIsAuthenticated(true)
   }
 
   const handleLogout = () => {
-    localStorage.clear() // Wipes token, userEmail, and role cache synchronously 🚪
+    localStorage.clear() 
     setRole('user')
     setIsAuthenticated(false)
   }
@@ -32,7 +32,7 @@ function App() {
     <main className="min-h-screen bg-slate-950 text-white font-sans antialiased">
       {isAuthenticated ? (
         <Dashboard 
-          userRole={role} // Optional explicit injection hook
+          userRole={role} 
           onLogout={handleLogout} 
         />
       ) : (
