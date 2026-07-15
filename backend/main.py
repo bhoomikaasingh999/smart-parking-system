@@ -37,9 +37,8 @@ except Exception as e:
 class BookingRequest(BaseModel):
     userEmail: EmailStr
 
-# 📝 EXTENDED SCHEMAS: In-file request extension hook for smooth signup streams
 class DynamicUserCreate(UserCreate):
-    username: Optional[str] = None # Capture explicit customized user name safely
+    username: Optional[str] = None 
 
 def calculate_live_price(slot_id: str, occupancy_pct: float) -> float:
     now = datetime.now()
@@ -59,19 +58,19 @@ def calculate_live_price(slot_id: str, occupancy_pct: float) -> float:
 # -----------------------------
 
 @app.post("/api/auth/signup")
-async def signup(user: DynamicUserCreate): # Using dynamic configuration handler
+async def signup(user: DynamicUserCreate):
     existing_user = await user_collection.find_one({"email": user.email.lower()})
     if existing_user:
         raise HTTPException(status_code=400, detail="Email already registered!")
     
     hashed_password = get_password_hash(user.password)
     
-    # 🎯 EXPLICIT CAPTURE: Frontend input value prioritize karein, nahi toh fallback default lagayein
+  
     final_username = user.username if user.username else user.email.split('@')[0].capitalize()
 
     new_user = {
         "email": user.email.lower(), 
-        "username": final_username.strip(), # Database custom identity parameter persistence
+        "username": final_username.strip(), 
         "password": hashed_password,
         "wallet_balance": 500.0,
         "role": "user"
@@ -94,7 +93,7 @@ async def login(user: UserCreate):
     
     user_role = db_user.get("role", "user")
     
-    # Extract structural username or pull clean baseline backup sync
+   
     username_display = db_user.get("username", email_clean.split('@')[0].capitalize())
     
     access_token = create_access_token(data={"sub": email_clean, "role": user_role})
