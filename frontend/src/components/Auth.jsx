@@ -4,7 +4,7 @@ import axios from 'axios'
 function Auth({ onLoginSuccess }) { 
   const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
-  const [username, setUsername] = useState('') // 📝 New explicit custom state loop
+  const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState({ text: '', isError: false }) 
@@ -18,11 +18,10 @@ function Auth({ onLoginSuccess }) {
       ? 'http://localhost:8000/api/auth/login' 
       : 'http://localhost:8000/api/auth/signup'
 
-    // Form payload construction structure mapping
+    
     const payload = isLogin 
       ? { email, password }
-      : { email, password, username: username || email.split('@')[0] } // Signup incorporates username profile string
-
+      : { email, password, username: username || email.split('@')[0] } 
     try {
       const response = await axios.post(endpoint, payload)
 
@@ -39,7 +38,7 @@ function Auth({ onLoginSuccess }) {
           localStorage.setItem('token', token)
           localStorage.setItem('userEmail', email) 
           
-          // 📝 USERNAME CAPTURE LAYER: Pull dynamic database name back to localstorage memory
+        
           const customUsername = response.data.username || email.split('@')[0]
           localStorage.setItem('userName', customUsername)
           
@@ -54,7 +53,7 @@ function Auth({ onLoginSuccess }) {
           }, 1000)
         }
       } else {
-        // Toggle view seamlessly to active login sequence post-registration creation bounds
+       
         setTimeout(() => {
           setIsLogin(true)
           setUsername('')
@@ -75,13 +74,12 @@ function Auth({ onLoginSuccess }) {
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 selection:bg-purple-500 selection:text-white relative overflow-hidden">
       
-      {/* Decorative Purple Ambient Glow in Background */}
+
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
-      {/* Main Glassmorphism Auth Card */}
       <div className="w-full max-w-md bg-purple-950/40 border border-purple-800/40 backdrop-blur-md rounded-2xl p-8 shadow-2xl z-10">
         
-        {/* 🔥 ULTRA DYNAMIC WIDE TEXT HEADER */}
+       
         <div className="flex flex-col items-center justify-center mb-6 select-none">
           <h1 
             className="text-3xl text-center bg-gradient-to-r from-purple-400 via-purple-200 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(168,85,247,0.4)] mb-1.5 tracking-wider uppercase"
@@ -98,7 +96,7 @@ function Auth({ onLoginSuccess }) {
           </h2>
         </div>
 
-        {/* 📢 DYNAMIC STATE ALERT BANNER */}
+       
         {message.text && (
           <div className={`mb-5 p-3 rounded-xl text-xs font-medium text-center border backdrop-blur-sm transition-all ${
             message.isError 
@@ -111,7 +109,7 @@ function Auth({ onLoginSuccess }) {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           
-          {/* 📝 DYNAMIC CONDITIONAL USERNAME FIELD (RENDERS ONLY ON SIGNUP STAGES) */}
+          
           {!isLogin && (
             <div className="animate-fade-in">
               <label className="block text-sm font-medium text-purple-200 mb-2">Display Username</label>
@@ -127,7 +125,7 @@ function Auth({ onLoginSuccess }) {
             </div>
           )}
 
-          {/* Email Input Field */}
+         
           <div>
             <label className="block text-sm font-medium text-purple-200 mb-2">Email Address</label>
             <input 
@@ -141,7 +139,7 @@ function Auth({ onLoginSuccess }) {
             />
           </div>
 
-          {/* Password Input Field */}
+         
           <div>
             <label className="block text-sm font-medium text-purple-200 mb-2">Password</label>
             <input 
@@ -155,7 +153,7 @@ function Auth({ onLoginSuccess }) {
             />
           </div>
 
-          {/* Submit Action Button */}
+          
           <button 
             type="submit"
             disabled={loading}
@@ -173,7 +171,7 @@ function Auth({ onLoginSuccess }) {
           </button>
         </form>
 
-        {/* Toggle Form State Controller */}
+        
         <div className="mt-6 text-center">
           <button 
             onClick={() => {
