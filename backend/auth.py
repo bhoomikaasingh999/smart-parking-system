@@ -2,7 +2,7 @@ from passlib.context import CryptContext
 import jwt
 from datetime import datetime, timedelta
 
-# Password hashing ka setup
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 SECRET_KEY = "SUPER_SECRET_KEY_FOR_PARKING_APP"
