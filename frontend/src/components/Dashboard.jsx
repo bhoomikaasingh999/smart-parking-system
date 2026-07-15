@@ -14,7 +14,7 @@ import {
 } from 'chart.js'
 import { Line, Bar, Pie } from 'react-chartjs-2'
 
-// Registering standard ChartJS components
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -30,7 +30,7 @@ ChartJS.register(
 axios.defaults.baseURL = 'http://localhost:8000';
 
 function Dashboard({ onLogout }) {
-  // 📝 PROFILE CAPTURE: Pull username customized string directly from cache storage state
+ 
   const userName = localStorage.getItem('userName') || 'Agent'
   const [slots, setSlots] = useState([])
   const [occupancy, setOccupancy] = useState(0)
@@ -145,18 +145,16 @@ function Dashboard({ onLogout }) {
 
   return (
     <div className="min-h-screen bg-slate-950 p-6 relative flex flex-col items-center selection:bg-purple-500 selection:text-white">
-      {/* Premium Spatial Ambient Glow Blurs */}
+      
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
-      {/* Top Navbar Header */}
       <div className="w-full max-w-5xl flex flex-col md:flex-row justify-between items-center border-b border-purple-900/40 pb-5 mb-6 z-10 gap-4">
         <div>
           <h1 className="text-3xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 via-purple-200 to-indigo-400 bg-clip-text text-transparent uppercase" style={{ fontFamily: "'Syne', sans-serif" }}>
             SMARTGAADI {userRole === 'admin' && <span className="text-sm font-mono text-purple-400 ml-2 bg-purple-950/60 border border-purple-800/40 px-2.5 py-0.5 rounded-full tracking-widest font-black uppercase">ADMIN CONSOLE</span>}
           </h1>
           
-          {/* PROFESSIONAL HIGH-TIER USER PROFILE CHIP (EMAIL EXPLICITLY REMOVED) */}
           <div className="flex items-center gap-2.5 mt-2 bg-gradient-to-r from-purple-950/30 to-slate-900/40 border border-purple-900/40 px-3.5 py-1.5 rounded-xl w-fit shadow-md backdrop-blur-sm">
             <div className="w-5 h-5 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center font-mono text-[10px] font-black text-purple-400 uppercase">
               {userName.charAt(0)}
@@ -167,7 +165,7 @@ function Dashboard({ onLogout }) {
           </div>
         </div>
         
-        {/* Metric Badges & Logout Section */}
+       
         <div className="flex flex-col sm:flex-row gap-4 items-center z-10">
           <div className="flex flex-col sm:flex-row gap-3 items-center">
             {userRole !== 'admin' && (
@@ -197,7 +195,7 @@ function Dashboard({ onLogout }) {
         </div>
       </div>
 
-      {/* Main Layout Container */}
+      
       <div className="w-full max-w-5xl z-10">
         {message && (
           <div className="mb-6 p-4 rounded-xl bg-purple-950/50 border border-purple-800/40 backdrop-blur-md text-sm font-medium text-center text-purple-200 shadow-xl animate-fade-in">
@@ -205,10 +203,10 @@ function Dashboard({ onLogout }) {
           </div>
         )}
 
-        {/* 📊 ADVANCED BUSINESS ANALYTICS CONTAINER (RENDERS FOR ADMIN ROLES ONLY) */}
+        
         {userRole === 'admin' && analyticsData && (
           <div className="mb-8 grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in">
-            {/* Chart 1: Linear Revenue Analysis */}
+            
             <div className="bg-slate-900/40 border border-purple-900/30 backdrop-blur-md rounded-2xl p-4 shadow-xl">
               <h3 className="text-xs font-mono font-bold text-purple-300 tracking-wider mb-3 uppercase">Hourly Revenue Streams</h3>
               <Line 
@@ -226,7 +224,7 @@ function Dashboard({ onLogout }) {
               />
             </div>
 
-            {/* Chart 2: Weekday Bar Load Trends */}
+           
             <div className="bg-slate-900/40 border border-purple-900/30 backdrop-blur-md rounded-2xl p-4 shadow-xl">
               <h3 className="text-xs font-mono font-bold text-purple-300 tracking-wider mb-3 uppercase">Weekly Occupancy Scaling</h3>
               <Bar 
@@ -244,7 +242,7 @@ function Dashboard({ onLogout }) {
               />
             </div>
 
-            {/* Chart 3: EV Share Spatial Breakdown */}
+            
             <div className="bg-slate-900/40 border border-purple-900/30 backdrop-blur-md rounded-2xl p-4 shadow-xl flex flex-col justify-between">
               <h3 className="text-xs font-mono font-bold text-purple-300 tracking-wider mb-1 uppercase">EV vs Standard Breakdown</h3>
               <div className="max-w-[170px] mx-auto py-2">
@@ -265,7 +263,7 @@ function Dashboard({ onLogout }) {
           </div>
         )}
 
-        {/* Legend Indicators */}
+        
         <div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <div className="flex flex-wrap gap-4 text-xs font-medium">
             <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-500"></span> Empty Space</span>
@@ -274,7 +272,7 @@ function Dashboard({ onLogout }) {
           </div>
         </div>
 
-        {/* 🚗 LIVE DYNAMIC COMPACT SLOTS GRID (5 PER ROW) */}
+       
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {slots.map((slot) => {
             const isEvSlot = slot.is_ev;
@@ -291,7 +289,7 @@ function Dashboard({ onLogout }) {
                       : 'bg-gradient-to-b from-emerald-950/10 to-slate-900/40 border-dashed border-emerald-800/40 hover:border-emerald-500/60 shadow-sm'
                 }`}
               >
-                {/* Top Section: Slot ID and Badges */}
+                
                 <div className="flex justify-between items-center">
                   <span className={`text-[11px] tracking-widest font-black ${isEvSlot ? 'text-cyan-400' : 'text-purple-400'}`} style={{ fontFamily: "'Syne', sans-serif" }}>
                     {slot.slot_id}
@@ -310,7 +308,7 @@ function Dashboard({ onLogout }) {
                   </div>
                 </div>
 
-                {/* Middle Section: Graphics Placeholder */}
+                
                 <div className="flex flex-col items-center justify-center my-1 h-12 relative">
                   {slot.is_occupied ? (
                     <div className="flex flex-col items-center animate-fade-in">
@@ -330,7 +328,7 @@ function Dashboard({ onLogout }) {
                   )}
                 </div>
 
-                {/* Bottom Section: Compact Price and Conditional Actions */}
+                
                 <div className="mt-1">
                   <div className="flex justify-between items-center mb-1.5">
                     <p className="text-sm font-bold text-white">₹{displayPrice}<span className="text-[10px] text-purple-400/50 font-normal">/h</span></p>
