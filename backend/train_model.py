@@ -6,24 +6,23 @@ from sklearn.ensemble import RandomForestRegressor
 def generate_mock_data(samples=5000):
     np.random.seed(42)
     
-    # 1. Base Variables Generate Karna
     hour_of_day = np.random.randint(0, 24, size=samples)
-    day_of_week = np.random.randint(0, 7, size=samples) # 0=Monday, 6=Sunday
+    day_of_week = np.random.randint(0, 7, size=samples) 
     
-    # 2. Occupancy Simulation: Office hours (9 AM - 6 PM) me bheed zyada hoti hai
+  
     base_occupancy = np.random.uniform(10, 40, size=samples)
     peak_hour_bonus = np.where((hour_of_day >= 9) & (hour_of_day <= 18), np.random.uniform(30, 50, size=samples), 0)
     weekend_bonus = np.where(day_of_week >= 5, np.random.uniform(10, 20, size=samples), 0)
     
     current_occupancy_percentage = np.clip(base_occupancy + peak_hour_bonus + weekend_bonus, 0, 100)
     
-    # 3. Pricing Rule Layer: Baseline price is ₹50, scales dynamically to max ₹100
+    
     base_price = 50
-    demand_multiplier = (current_occupancy_percentage / 100) * 40  # Occupancy ke base pr upto +₹40
-    time_multiplier = np.where((hour_of_day >= 17) & (hour_of_day <= 21), 10, 0) # Evening rush hour ka +₹10
+    demand_multiplier = (current_occupancy_percentage / 100) * 40  
+    time_multiplier = np.where((hour_of_day >= 17) & (hour_of_day <= 21), 10, 0) 
     
     price = base_price + demand_multiplier + time_multiplier
-    price = np.clip(price, 50, 100) # Price range locked between ₹50 and ₹100
+    price = np.clip(price, 50, 100) 
     
     return pd.DataFrame({
         'hour_of_day': hour_of_day,
@@ -42,6 +41,5 @@ print("Training RandomForestRegressor model...")
 model = RandomForestRegressor(n_estimators=100, random_state=42)
 model.fit(X, y)
 
-# Save artifact directly inside the backend root folder
 joblib.dump(model, 'pricing_model.pkl')
 print("Model trained successfully")
